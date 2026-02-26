@@ -39,20 +39,18 @@ export default function ProofCalculator({
 
   const accentStyles = {
     purple: {
-      ring: "ring-purple-500/40",
       selectedBg: "bg-purple-600",
       selectedText: "text-white",
-      sliderAccent: "accent-purple-500",
-      proofBadge: "bg-purple-900/50 border-purple-500/40 text-purple-200",
-      headerGlow: "text-purple-300",
+      proofBadge: "bg-purple-900/40 border-purple-500/30 text-purple-200",
+      headerColor: "text-purple-300",
+      sealLabel: "Purple Seal",
     },
     gold: {
-      ring: "ring-yellow-500/40",
       selectedBg: "bg-yellow-600",
       selectedText: "text-black",
-      sliderAccent: "accent-yellow-500",
-      proofBadge: "bg-yellow-900/50 border-yellow-500/40 text-yellow-200",
-      headerGlow: "text-yellow-300",
+      proofBadge: "bg-yellow-900/40 border-yellow-500/30 text-yellow-200",
+      headerColor: "text-yellow-300",
+      sealLabel: "Gold Seal",
     },
   };
 
@@ -61,7 +59,7 @@ export default function ProofCalculator({
   return (
     <div className="flex flex-col items-center w-full max-w-sm mx-auto">
       {/* Bottle Image */}
-      <div className="relative w-44 h-64 md:w-52 md:h-72 mb-4 rounded-2xl overflow-hidden bg-gradient-to-b from-neutral-100 to-neutral-50 shadow-lg shadow-black/30">
+      <div className="relative w-44 h-64 md:w-52 md:h-72 mb-4 rounded-xl overflow-hidden bg-gradient-to-b from-neutral-200 to-neutral-100 shadow-lg shadow-black/40">
         <Image
           src={bottleImage}
           alt={`Eleanor ${batchName}`}
@@ -74,23 +72,26 @@ export default function ProofCalculator({
 
       {/* Batch Name */}
       <h2
-        className={`text-xl font-bold ${styles.headerGlow} mb-1 tracking-wide`}
+        className={`text-lg font-extrabold uppercase tracking-[0.15em] ${styles.headerColor} mb-1`}
       >
         {batchName}
       </h2>
+      <p className="text-neutral-500 text-xs font-semibold uppercase tracking-wider mb-2">
+        {styles.sealLabel}
+      </p>
 
       {/* Starting Proof Badge */}
       <div
-        className={`inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-semibold mb-6 ${styles.proofBadge}`}
+        className={`inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-bold mb-5 ${styles.proofBadge}`}
       >
         {startingProof} Proof
       </div>
 
       {/* Calculator Card */}
-      <div className="w-full bg-neutral-900/80 backdrop-blur-sm rounded-2xl border border-neutral-700/50 p-5 space-y-5">
+      <div className="w-full bg-wt-dark/80 backdrop-blur-sm rounded-xl border border-neutral-700/40 p-5 space-y-5">
         {/* Pour Size Selector */}
         <div>
-          <label className="block text-neutral-400 text-xs uppercase tracking-widest mb-2">
+          <label className="block text-neutral-400 text-xs font-bold uppercase tracking-[0.15em] mb-2">
             Pour Size
           </label>
           <div className="grid grid-cols-3 gap-2">
@@ -98,7 +99,7 @@ export default function ProofCalculator({
               <button
                 key={size.value}
                 onClick={() => setPourSize(size.value)}
-                className={`py-2.5 px-3 rounded-lg text-sm font-semibold transition-all duration-150 ${
+                className={`py-2.5 px-3 rounded-lg text-sm font-bold transition-all duration-150 ${
                   pourSize === size.value
                     ? `${styles.selectedBg} ${styles.selectedText} shadow-lg`
                     : "bg-neutral-800 text-neutral-300 hover:bg-neutral-700"
@@ -113,10 +114,10 @@ export default function ProofCalculator({
         {/* Desired Proof Slider */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="text-neutral-400 text-xs uppercase tracking-widest">
+            <label className="text-neutral-400 text-xs font-bold uppercase tracking-[0.15em]">
               Desired Proof
             </label>
-            <span className="text-amber-100 font-bold text-lg tabular-nums">
+            <span className="text-white font-extrabold text-lg tabular-nums">
               {desiredProof}
             </span>
           </div>
@@ -127,9 +128,9 @@ export default function ProofCalculator({
             step={1}
             value={desiredProof}
             onChange={(e) => setDesiredProof(Number(e.target.value))}
-            className={`w-full h-2 rounded-full appearance-none cursor-pointer bg-neutral-700 ${styles.sliderAccent}`}
+            className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-neutral-700"
           />
-          <div className="flex justify-between text-xs text-neutral-500 mt-1">
+          <div className="flex justify-between text-xs text-neutral-600 mt-1 font-semibold">
             <span>{MIN_PROOF}</span>
             <span>{startingProof}</span>
           </div>
